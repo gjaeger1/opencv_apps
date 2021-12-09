@@ -1,9 +1,8 @@
 <launch>
   <arg name="node_name" default="face_detection" />
-  <arg name="use_opencv3" default="false" />
   <arg name="use_opencv3_1" default="false" />
   <arg name="use_opencv3_2" default="false" />
-  <arg name="use_opencv3_3" default="$(arg use_opencv3)" />
+  <arg name="use_opencv3_3" default="false" />
   <arg name="use_opencv4" default="false" />
 
   <arg name="image" default="image" doc="The image topic. Should be remapped to the name of the real image topic." />
@@ -29,9 +28,9 @@
   <arg if="$(arg use_opencv4)"
        name="eyes_cascade_name" default="/usr/share/opencv4/haarcascades/haarcascade_eye_tree_eyeglasses.xml" doc="Eye dtection cascade Filename" />
 
-  <arg unless="$(arg use_opencv3)"
+  <arg unless="$(eval arg('use_opencv3_1') or arg('use_opencv3_2') or arg('use_opencv3_3') or arg('use_opencv4'))"
        name="face_cascade_name" default="/usr/share/opencv/haarcascades/haarcascade_frontalface_alt.xml" doc="Face dtection cascade Filename" />
-  <arg unless="$(arg use_opencv3)"
+  <arg unless="$(eval arg('use_opencv3_1') or arg('use_opencv3_2') or arg('use_opencv3_3') or arg('use_opencv4'))"
        name="eyes_cascade_name" default="/usr/share/opencv/haarcascades/haarcascade_eye_tree_eyeglasses.xml" doc="Eye dtection cascade Filename" />
 
   <!-- face_detection.cpp -->
